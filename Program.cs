@@ -76,6 +76,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseRouting();
+app.MapGet("/ping", () => "pong");
+
 // Mapear controladores de API
 app.MapControllers();
 
