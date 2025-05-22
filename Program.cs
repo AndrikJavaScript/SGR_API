@@ -1,12 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
 using System.Text;
 using SGR_API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
+
+// Configurar el puerto dinámicamente (por ejemplo, usando la variable de entorno "PORT")
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 // Definir política de CORS para permitir Angular
 builder.Services.AddCors(options =>
