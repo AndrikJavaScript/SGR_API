@@ -24,8 +24,9 @@ builder.Services.AddCors(options =>
 
 // Configurar la conexión a la base de datos
 builder.Services.AddDbContext<SGRContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("SGRConnection"))
+    options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"))
 );
+
 
 // Configuración de autenticación y JWT
 var key = Encoding.UTF8.GetBytes(configuration["Jwt:Key"]);
