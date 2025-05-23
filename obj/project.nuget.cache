@@ -84,7 +84,7 @@
     {
       "code": "NU1605",
       "level": "Error",
-      "message": "Advertencia como error: Degradación del paquete detectada: Microsoft.EntityFrameworkCore de 9.0.1 a 8.0.10. Haga referencia al paquete directamente desde el proyecto para seleccionar una versión diferente. \r\n SGR_API -> Npgsql.EntityFrameworkCore.PostgreSQL 9.0.4 -> Microsoft.EntityFrameworkCore (>= 9.0.1 && < 10.0.0) \r\n SGR_API -> Microsoft.EntityFrameworkCore (>= 8.0.10)",
+      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore from 9.0.1 to 8.0.10. Reference the package directly from the project to select a different version. \r\n SGR_API -> Npgsql.EntityFrameworkCore.PostgreSQL 9.0.4 -> Microsoft.EntityFrameworkCore (>= 9.0.1 && < 10.0.0) \r\n SGR_API -> Microsoft.EntityFrameworkCore (>= 8.0.10)",
       "libraryId": "Microsoft.EntityFrameworkCore",
       "targetGraphs": [
         "net8.0"
