@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SGR_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86cad9a1826894f84b52d668088f6b9b4b2eb120")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e9d861b3bc9472e33bd5f47c01177418f6836e3")]
 [assembly: System.Reflection.AssemblyProductAttribute("SGR_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SGR_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
