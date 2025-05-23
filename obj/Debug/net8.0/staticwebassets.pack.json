@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\flavi\\Documents\\Gestor de Refencias\\SGR_API\\SGR_API\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGR_API.bundle.scp.css",
-      "PackagePath": "staticwebassets\\SGR_API.rm16ah6qck.bundle.scp.css"
+      "PackagePath": "staticwebassets\\SGR_API.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\flavi\\Documents\\Gestor de Refencias\\SGR_API\\SGR_API\\wwwroot\\css\\site.css",
@@ -243,10 +243,6 @@
     {
       "Id": "C:\\Users\\flavi\\Documents\\Gestor de Refencias\\SGR_API\\SGR_API\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
-    },
-    {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SGR_API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
-      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SGR_API.Microsoft.AspNetCore.StaticWebAssets.props",
