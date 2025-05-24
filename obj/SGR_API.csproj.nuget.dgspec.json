@@ -65,9 +65,9 @@
               "target": "Package",
               "version": "[9.0.1, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[8.0.10, )"
+              "version": "[9.0.1, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -75,9 +75,9 @@
               "target": "Package",
               "version": "[9.0.1, )"
             },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+            "Pomelo.EntityFrameworkCore.MySQL": {
               "target": "Package",
-              "version": "[9.0.4, )"
+              "version": "[9.0.0-preview.3.efcore.9.0.0, )"
             },
             "System.Formats.Asn1": {
               "target": "Package",

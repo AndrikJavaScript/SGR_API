@@ -24,8 +24,10 @@ builder.Services.AddCors(options =>
 
 // Configurar la conexión a la base de datos
 builder.Services.AddDbContext<SGRContext>(options =>
-    options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"))
+    options.UseMySql(Environment.GetEnvironmentVariable("MYSQL_URL"),
+        new MySqlServerVersion(new Version(8, 0, 36))) // Ajusta la versión según la de Railway
 );
+
 
 
 // Configuración de autenticación y JWT
@@ -77,7 +79,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseRouting();
-app.MapGet("/ping", () => "pong");
+app.MapGet("/test-db", async (SGRContext db) =>
+{
+    var canConnect = await db.Database.CanConnectAsync();
+    return canConnect ? "Conexión exitosa a MySQL" : "Error en la conexión a la base de datos";
+});
 
 // Mapear controladores de API
 app.MapControllers();
