@@ -3,15 +3,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using SGR_API.Data;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
-// Configurar el puerto dinámicamente (por ejemplo, usando la variable de entorno "PORT")
+// Configurar el puerto dinámicamente
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-// Definir política de CORS para permitir Angular
+// Configurar CORS para Angular
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
@@ -22,13 +23,32 @@ builder.Services.AddCors(options =>
     );
 });
 
-// Configurar la conexión a la base de datos
+// ---- Código para transformar la URL de conexión MySQL ----
+// Obtén la variable de entorno "MYSQL_URL"
+var mysqlUrl = Environment.GetEnvironmentVariable("MYSQL_URL");
+if (string.IsNullOrWhiteSpace(mysqlUrl))
+{
+    throw new Exception("La variable MYSQL_URL no está configurada");
+}
+
+// Parsear la URL de conexión
+Uri uri = new Uri(mysqlUrl); 
+string[] userInfo = uri.UserInfo.Split(':'); // Extrae usuario y contraseña
+
+string server = uri.Host;
+int portNumber = uri.Port;
+string database = uri.AbsolutePath.TrimStart('/'); // Quita la barra inicial
+string username = userInfo[0];
+string password = userInfo[1];
+
+// Construir la cadena de conexión en formato ADO.NET
+string connectionString = $"Server={server};Port={portNumber};Database={database};User={username};Password={password};";
+
+// Configurar el DbContext usando la cadena de conexión procesada
 builder.Services.AddDbContext<SGRContext>(options =>
-    options.UseMySql(Environment.GetEnvironmentVariable("MYSQL_URL"),
-        new MySqlServerVersion(new Version(8, 0, 36))) // Ajusta la versión según la de Railway
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 36)))
 );
-
-
+// ---- Fin del código para MySQL ----
 
 // Configuración de autenticación y JWT
 var key = Encoding.UTF8.GetBytes(configuration["Jwt:Key"]);
@@ -47,7 +67,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Aquí es donde agregamos la configuración para el serializador JSON:
+// Configuración de serialización JSON
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -57,7 +77,7 @@ builder.Services.AddControllers()
 
 var app = builder.Build();
 
-// Manejo de errores en producción
+// Manejo de errores
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -71,7 +91,6 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// Aplicar política de CORS
 app.UseCors("AllowAngularApp");
 
 // Middleware de autenticación y autorización
@@ -84,8 +103,6 @@ app.MapGet("/test-db", async (SGRContext db) =>
     var canConnect = await db.Database.CanConnectAsync();
     return canConnect ? "Conexión exitosa a MySQL" : "Error en la conexión a la base de datos";
 });
-
-// Mapear controladores de API
 app.MapControllers();
 
 app.Run();
